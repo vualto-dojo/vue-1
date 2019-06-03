@@ -1,17 +1,47 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <User
+      v-on:kill="removeUser(user)"
+      v-for="user in users"
+      :user="user"
+      :key="user.name"
+    />
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import User from "./components/User.vue";
 
 export default {
   name: "app",
   components: {
-    HelloWorld
+    User
+  },
+  data() {
+    return {
+      users: [
+        {
+          name: "James",
+          age: 28
+        },
+        {
+          name: "Corrie",
+          age: 22
+        },
+        {
+          name: "Mark",
+          age: 39
+        }
+      ]
+    };
+  },
+  methods: {
+    removeUser(user) {
+      this.users = this.users.filter(iterUser => {
+        return user.name !== iterUser.name;
+      });
+    }
   }
 };
 </script>
